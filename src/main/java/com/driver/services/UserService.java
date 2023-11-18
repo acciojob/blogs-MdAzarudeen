@@ -2,6 +2,7 @@ package com.driver.services;
 
 import com.driver.models.*;
 import com.driver.repositories.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,18 @@ public class UserService {
     @Autowired
     UserRepository userRepository3;
 
-    public User createUser(String username, String password){
-
-
+    public void createUser(User user){
+        userRepository3.save(user);
     }
 
     public void deleteUser(int userId){
-
+        userRepository3.deleteById(userId);
     }
 
-    public User updateUser(Integer id, String password){
-
+    public void updateUser(User user){
+        userRepository3.save(user);
+    }
+    public User findByUserName(String username){
+        return userRepository3.findByUsername(username);
     }
 }
