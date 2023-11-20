@@ -1,28 +1,30 @@
-import com.driver.models.Blog;
+package com.driver.models;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
-    private String password;
-
-    @OneToMany
-    List<Blog> blogs;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Blog> blogList;
 
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String password) {
+    public User(int id, String username, String password, String firstName, String lastName, List<Blog> blogList) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
+        this.blogList = blogList;
     }
 
     public int getId() {
@@ -31,6 +33,22 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -49,11 +67,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 }

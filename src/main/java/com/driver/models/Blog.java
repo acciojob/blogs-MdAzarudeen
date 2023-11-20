@@ -1,51 +1,32 @@
 package com.driver.models;
-import org.apache.catalina.User;
-//import org.springframework.boot.maven.Image;
 
 import javax.persistence.*;
-//import java.awt.*;
-import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Blog{
+public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    private String  title;
+    private int id;
+    private String title;
     private String content;
-    private Date  pubDate;
-
+    private Date pubDate;
     @ManyToOne
-    User user;
-    @OneToMany
-    List<Image> image;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Image> getImage() {
-        return image;
-    }
-
-    public void setImage(List<Image> image) {
-        this.image = image;
-    }
+    private User user;
+    @OneToMany(mappedBy = "blog")
+    private List<Image> imageList;
 
     public Blog() {
     }
 
-    public Blog(int id, String title, String content, Date pubDate) {
+    public Blog(int id, String title, String content, Date pubDate, User user, List<Image> imageList) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
+        this.user = user;
+        this.imageList = imageList;
     }
 
     public int getId() {
@@ -78,5 +59,21 @@ public class Blog{
 
     public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }

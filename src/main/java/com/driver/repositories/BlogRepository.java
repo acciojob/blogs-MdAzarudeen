@@ -12,6 +12,4 @@ import java.util.List;
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
 
-    @Query(value = "select * from blog", nativeQuery = true)
-    public List<Blog> getAllBlogRecords()
 }
